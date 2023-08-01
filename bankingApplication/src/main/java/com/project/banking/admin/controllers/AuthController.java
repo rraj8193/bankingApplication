@@ -11,8 +11,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.project.banking.config.JwtUtils;
+//import com.project.banking.config.JwtUtilities;
 import com.project.banking.customer.dao.AuthInfoServiceImpl;
 import com.project.banking.customer.entities.AuthInfo;
+import com.project.banking.customer.entities.JwtRequest;
+import com.project.banking.customer.entities.JwtResponse;
 
 
 @RestController
@@ -21,6 +25,9 @@ public class AuthController {
 	
 	@Autowired
 	AuthInfoServiceImpl authInfoService;
+	
+	@Autowired
+	JwtUtils jwtUtils;
 	
 	
 	
@@ -40,5 +47,11 @@ public class AuthController {
 			return ResponseEntity.status(HttpStatus.CONFLICT).body("Username Already exist");
 		}
 		
+	}
+	
+	@PostMapping("/authenticate")
+	public JwtResponse authenticate(@RequestBody JwtRequest jwtRequest) {
+		System.out.println("In AuthController");
+		return jwtUtils.authenticate(jwtRequest);
 	}
 }

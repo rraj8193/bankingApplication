@@ -24,7 +24,7 @@ public class AuthInfo {
 	private String password;
 	
 	@Column(name = "role")
-	private String role;
+	private String role = "USER";
 	
 	@OneToOne
 	@JsonBackReference
@@ -76,12 +76,12 @@ public class AuthInfo {
 		this.customerInfo = customerInfo;
 	}
 
-	public AuthInfo(String username, String email, String password, String role, CustomerInfo customerInfo) {
+	public AuthInfo(String username, String email, String password, CustomerInfo customerInfo) {
 		super();
 		this.username = username;
 		this.email = email;
 		this.password = password;
-		this.role = role;
+		this.role = "ROLE_USER";
 		this.customerInfo = customerInfo;
 	}
 
